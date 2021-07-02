@@ -11,12 +11,21 @@ namespace Tracker.Manager
     {
         private const string Root = "wwwroot/Content/FootPrint.txt";
 
+        /// <summary>
+        /// add Serialized footprint to the root file
+        /// </summary>
+        /// <param name="footPrint"></param>
+        /// 
         public static async Task Save(object footPrint)
         {
             await using StreamWriter file = new(Root, append: true);
             await file.WriteLineAsync(JsonConvert.SerializeObject(footPrint));
         }
 
+        /// <summary>
+        /// Get all footprint
+        /// </summary>
+        /// <returns>list of foot prints</returns>
         public static async Task<IEnumerable<FootPrint>> GetFootPrints()
         {
             using var reader = new StreamReader(Root);

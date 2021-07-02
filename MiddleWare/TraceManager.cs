@@ -32,7 +32,7 @@ namespace Tracker.MiddleWare
                             RecDate = DateTime.Now.ToShortDateString(),
                             Data = context.Request.QueryString.Value
                         };
-                        await FileManger.Save(footPrint);     
+                        await FileManger.Save(footPrint);
                     }
                 });
             }
