@@ -19,16 +19,22 @@ namespace Tracker.MiddleWare
         {
             if (context.Request.Path.Value != null && !context.Request.Path.Value.Equals("/"))
             {
-                var footPrint = new FootPrint
+                context.Response.OnStarting(async () =>
                 {
-                    Path = context.Request.Path.Value,
-                    Method = context.Request.Method,
-                    Ip = context.Connection.RemoteIpAddress?.ToString(),
-                    User = context.User.Identity?.Name,
-                    RecDate = DateTime.Now.ToShortDateString(),
-                    Data = context.Request.QueryString.Value
-                };
-                await FileManger.Save(footPrint);
+                    if (context.Response.StatusCode != StatusCodes.Status404NotFound)
+                    {
+                        var footPrint = new FootPrint
+                        {
+                            Path = context.Request.Path.Value,
+                            Method = context.Request.Method,
+                            Ip = context.Connection.RemoteIpAddress?.ToString(),
+                            User = context.User.Identity?.Name,
+                            RecDate = DateTime.Now.ToShortDateString(),
+                            Data = context.Request.QueryString.Value
+                        };
+                        await FileManger.Save(footPrint);     
+                    }
+                });
             }
 
             await _next.Invoke(context);

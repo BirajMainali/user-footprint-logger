@@ -15,10 +15,9 @@ namespace Tracker.Controllers
         {
             _logger = logger;
         }
-
+        
         public async Task<IActionResult> Index() => View(await FileManger.GetFootPrints());
-
-
+        
         public IActionResult Privacy() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
