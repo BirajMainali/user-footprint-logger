@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Tracker.Manager;
 using Tracker.Models;
 
 namespace Tracker.Controllers
@@ -14,15 +16,10 @@ namespace Tracker.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public async Task<IActionResult> Index() => View(await FileManger.GetFootPrints());
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
+        public IActionResult Privacy() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Tracker.Manager;
+using Tracker.Models;
 
 namespace Tracker.MiddleWare
 {
@@ -15,13 +17,14 @@ namespace Tracker.MiddleWare
 
         public async Task Invoke(HttpContext context)
         {
-            var footPrint = new
+            var footPrint = new FootPrint
             {
                 Path = context.Request.Path.Value,
                 Method = context.Request.Method,
                 Ip = context.Connection.RemoteIpAddress?.ToString(),
                 User = context.User.Identity?.Name,
-                data = context.Request.QueryString.Value,
+                RecDate = DateTime.Now.ToShortDateString(),
+                Data = context.Request.QueryString.Value
             };
             await FileManger.Save(footPrint);
             await _next.Invoke(context);
