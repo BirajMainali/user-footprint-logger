@@ -1,7 +1,7 @@
 ﻿@model System.Collections.Generic.IEnumerable<Tracker.Models.FootPrint>
 
 @{
-    ViewBag.Title = "View Trace";
+    ViewBag.Title = "Foot Print's";
     Layout = "_Layout";
 }
 <table class="table table-striped table-bordered">
@@ -10,10 +10,10 @@
         <td>#</td>
         <td>IP</td>
         <td>Path</td>
-        <td>Data</td>
+        <td>User</td>
         <td>Method</td>
         <td>Date</td>
-        <td>User</td>
+        <td>Data</td>
     </tr>
     </thead>
     <tbody>
@@ -25,10 +25,10 @@
                 <td>@(sn++)</td>
                 <td>@trace.Ip</td>
                 <td>@trace.Path</td>
-                <td>@trace.Data</td>
+                <td>@trace.User</td>
                 <td>@trace.Method</td>
                 <td>@trace.RecDate</td>
-                <td>@trace.User</td>
+                <td>@trace.Data</td>
             </tr>
         }
     }

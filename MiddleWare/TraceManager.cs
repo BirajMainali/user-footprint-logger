@@ -17,16 +17,20 @@ namespace Tracker.MiddleWare
 
         public async Task Invoke(HttpContext context)
         {
-            var footPrint = new FootPrint
+            if (context.Request.Path.Value != null && !context.Request.Path.Value.Equals("/"))
             {
-                Path = context.Request.Path.Value,
-                Method = context.Request.Method,
-                Ip = context.Connection.RemoteIpAddress?.ToString(),
-                User = context.User.Identity?.Name,
-                RecDate = DateTime.Now.ToShortDateString(),
-                Data = context.Request.QueryString.Value
-            };
-            await FileManger.Save(footPrint);
+                var footPrint = new FootPrint
+                {
+                    Path = context.Request.Path.Value,
+                    Method = context.Request.Method,
+                    Ip = context.Connection.RemoteIpAddress?.ToString(),
+                    User = context.User.Identity?.Name,
+                    RecDate = DateTime.Now.ToShortDateString(),
+                    Data = context.Request.QueryString.Value
+                };
+                await FileManger.Save(footPrint);
+            }
+
             await _next.Invoke(context);
         }
     }
