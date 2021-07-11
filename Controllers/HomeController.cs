@@ -16,7 +16,7 @@ namespace Tracker.Controllers
             _logger = logger;
         }
         
-        public async Task<IActionResult> Index() => View(await FileManger.GetFootPrints());
+        public async Task<IActionResult> Index() => View(await TraceManger.GetFootPrints());
         
         public IActionResult Privacy() => View();
 

@@ -7,7 +7,7 @@ using Tracker.Models;
 
 namespace Tracker.Manager
 {
-    public static class FileManger
+    public static class TraceManger
     {
         private const string Root = "wwwroot/Content/FootPrint.txt";
 
@@ -25,7 +25,7 @@ namespace Tracker.Manager
         /// <summary>
         /// Get all footprint
         /// </summary>
-        /// <returns>list of foot prints</returns>
+        /// <returns></returns>
         public static async Task<IEnumerable<FootPrint>> GetFootPrints()
         {
             using var reader = new StreamReader(Root);
